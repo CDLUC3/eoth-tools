@@ -4,7 +4,7 @@ plugins {
     id "com.github.maiflai.scalatest" version "0.7"
 }
 
-group = 'com.dmoles'
+group = 'org.cdlib'
 version = '1.0-SNAPSHOT'
 
 ext {

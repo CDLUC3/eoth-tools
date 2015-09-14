@@ -9,7 +9,7 @@ version = '1.0-SNAPSHOT'
 
 ext {
   scalaMajorVersion = '2.11'
-  scalaVersion = "${scalaMajorVersion}.6"
+  scalaVersion = "${scalaMajorVersion}.7"
 }
 
 repositories {
@@ -28,6 +28,7 @@ dependencies {
   // ------------------------------------------------------------
   // Misc. libraries
 
+  compile "org.scala-lang.modules:scala-xml_${scalaMajorVersion}:1.0.5"
   compile 'log4j:log4j:1.2.17'
 
   // ------------------------------------------------------------

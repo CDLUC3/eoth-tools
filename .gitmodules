@@ -1,0 +1,3 @@
+[submodule "eothxtf"]
+	path = eothxtf
+	url = https://github.com/CDLUC3/eothxtf.git

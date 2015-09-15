@@ -110,19 +110,25 @@ class Records(val records: List[Record]) {
 
   lazy val allCoverage = byCoverage.keys.toList.sorted
 
+  lazy val allSources = records.flatMap(r => r.source).distinct.sorted
+
   lazy val sourcesByCoverage: Map[String, Set[String]] = allCoverage.map { coverage =>
     coverage -> byCoverage(coverage).flatMap(_.source).toSet
   }.toMap
 
   lazy val sourcesWithoutCoverage: Set[String] = withoutCoverage.flatMap(_.source).toSet
 
+  lazy val sourceToCoverage: Map[String, Set[String]] = {
+    toMultimap(records.flatMap(r => r.source.flatMap(s => r.coverage.map(c => s -> c))))
+  }
+
   // --------------------------------------------------
   // Private
 
-  private def toMultimap[K](tuples: List[(K, Record)]): Map[K, Set[Record]] = {
+  private def toMultimap[K, V](tuples: List[(K, V)]): Map[K, Set[V]] = {
     tuples.groupBy(_._1).map {
-      case (k: K, records: List[(K, Record)]) =>
-        k -> records.map(_._2).toSet
+      case (key: K, values: List[(K, V)]) =>
+        key -> values.map(_._2).toSet
     }
   }
 }
@@ -130,16 +136,14 @@ class Records(val records: List[Record]) {
 object Records {
   val log = Logger.getLogger(Records.getClass)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val eothxtf = Paths.get("").resolve("eothxtf")
     log.debug(s"eothxtf directory: $eothxtf")
     val data = eothxtf.resolve("data")
     val eoth08 = data.resolve("eoth08").toFile
     val eoth12 = data.resolve("eoth12").toFile
 
-    Stream(eoth08, eoth12).foreach { d =>
-      println()
-
+    val recordsByYear = Stream(eoth08, eoth12).map { d =>
       val xmlFiles = d.listFiles().filter(_.getName.endsWith(".xml"))
 
       var handleCount = 0
@@ -150,37 +154,58 @@ object Records {
         }
         Record.fromFile(f)
       }).toList)
+      d -> records
+    }.toMap
 
-      printSourcesByCoverage(d, records)
+    List(
+      printSubjects _,
+      printSourceAndCoverage _
+    ).foreach { f =>
+      recordsByYear.foreach { case (d: File, records: Records) =>
+        f.apply(d, records)
+      }
     }
   }
 
-  def printSourcesByCoverage(d: File, records: Records): Unit = {
-    println("#### Sources by coverage (" + d.getName + ")\n")
+  def printSourceAndCoverage(directory: File, records: Records): Unit = {
+    println("### Source and coverage (" + directory.getName + ")\n")
 
-    println("| Coverage | Sources |")
-    println("| :------- | :------ |")
-    records.sourcesByCoverage.foreach {
-      case (coverage: String, sourceSet: Set[String]) =>
-        val sources = sourceSet.toList.sorted.mkString(", ")
-        print(s"| $coverage ")
-        println(s"| $sources |")
+    println("| Sources | Coverage |")
+    println("| :------ | :------- |")
+
+    records.allSources.foreach { source =>
+      val coverages = records.sourceToCoverage.getOrElse(source, Set.empty[String]).mkString(", ")
+      println(s"| $source | $coverages |")
     }
 
-    val sources = records.sourcesWithoutCoverage.toList.sorted.mkString(", ")
-    print(s"| ")
-    println(s"| $sources |")
+    println()
+
+    //    println("### Sources by coverage (" + directory.getName + ")\n")
+    //
+    //    println("| Coverage | Sources |")
+    //    println("| :------- | :------ |")
+    //    records.sourcesByCoverage.foreach {
+    //      case (coverage: String, sourceSet: Set[String]) =>
+    //        val sources = sourceSet.toList.sorted.mkString(", ")
+    //        print(s"| $coverage ")
+    //        println(s"| $sources |")
+    //    }
+    //
+    //    val sources = records.sourcesWithoutCoverage.toList.sorted.mkString(", ")
+    //    print(s"| ")
+    //    println(s"| $sources |")
+    //    println()
   }
 
   private def printSubjects(directory: File, records: Records): Unit = {
-    println("#### Longest subject (" + directory.getName + ")")
+    println("### Longest subject (" + directory.getName + ")")
     println()
     val withLongestSubject = records.withLongestSubject
     println("**File:** [" + withLongestSubject.relativePath + "](https://github.com/CDLUC3/eothxtf/blob/master/data/" + withLongestSubject.relativePath + ")")
     println()
     println("**ID:** `" + withLongestSubject.identifier + "`")
     println()
-    println("**Subject:**")
+    println("**Subject (all one entry!):**")
     println()
     println("- " + withLongestSubject.longestSubject)
 
@@ -194,10 +219,7 @@ object Records {
     println("**ID:** `" + withMostSubjects.identifier + "`")
     println()
     println("**Subjects:**")
-    println()
-    withMostSubjects.subject.foreach { s =>
-      println("- " + s)
-    }
+    println("- " + withMostSubjects.subject.mkString(", "))
 
     println()
   }

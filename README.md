@@ -26,7 +26,7 @@ Tools for mucking around with [eothxtf](https://github.com/CDLUC3/eothxtf).
 
 - 5948 files (3305 for 2008, 2643 for 2012)
 - 97 [files with XML problems](https://docs.google.com/spreadsheets/d/19RqAj--Pj2HqHyv5Ipcpz_ydDOHHgvMusEM4N5b1zJo/edit?usp=sharing)
-  (fixed as of revision 45da629)
+  (all fixed as of [eothxtf revision 45da629](https://github.com/CDLUC3/eothxtf/commit/45da629cbc54543ea51f9629f558d646f7f26816))
 - different date formats:
   - 2008 uses yyyy-MM-dd
   - 2012 uses yyyyMMddHHmmss

@@ -47,6 +47,14 @@ case class Record(
     case Some(f) => f.getAbsolutePath
     case _ => ""
   }
+
+  lazy val relativePath = file match {
+    case Some(f) =>
+      val path = Paths.get(f.toURI)
+      val lastTwo = path.subpath(path.getNameCount - 2, path.getNameCount)
+      lastTwo.toString
+    case _ => ""
+  }
 }
 
 
@@ -87,7 +95,7 @@ object Record {
   }
 
   def fromFile(f: File): Option[Record] = {
-    print('.')
+//    print('.')
     try {
       Some(Record(f))
     } catch {

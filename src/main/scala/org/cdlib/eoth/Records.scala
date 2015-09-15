@@ -136,18 +136,18 @@ object Records {
       val records = new Records(xmlFiles.flatMap({ f: File =>
         handleCount = handleCount + 1
         if (handleCount % 100 == 0) {
-          println(s" $handleCount")
+//          println(s" $handleCount")
         }
         Record.fromFile(f)
       }).toList)
 
-      println(handleCount)
-      println()
+//      println(handleCount)
+//      println()
 
-      println("### Longest subject (" + d.getName + "):")
+      println("#### Longest subject (" + d.getName + "):")
       println()
       val withLongestSubject = records.withLongestSubject
-      println("**File:** `" + withLongestSubject.absolutePath + "`")
+      println("**File:** `" + withLongestSubject.relativePath + "`")
       println()
       println("**ID:** `" + withLongestSubject.identifier + "`")
       println()
@@ -157,10 +157,10 @@ object Records {
 
       println()
 
-      println("### Most subjects (" + d.getName + "):")
+      println("#### Most subjects (" + d.getName + "):")
       println()
       val withMostSubjects = records.withMostSubjects
-      println("**File:** `" + withMostSubjects.absolutePath + "`")
+      println("**File:** `" + withMostSubjects.relativePath + "`")
       println()
       println("**ID:** `" + withMostSubjects.identifier + "`")
       println()

@@ -2,6 +2,14 @@
 
 Tools for mucking around with [eothxtf](https://github.com/CDLUC3/eothxtf).
 
+- [Discoveries](#discoveries)
+  - [DC terms used](#dc-terms-used)
+  - [Subjects](#subjects)
+    - [Longest subject (eoth08)](#longest-subject--eoth08--)
+    - [Most subjects (eoth08)](#most-subjects--eoth08--)
+    - [Longest subject (eoth12)](#longest-subject--eoth12--)
+    - [Most subjects (eoth12)](#most-subjects--eoth12--)
+
 ## Discoveries
 
 - 5948 files (3305 for 2008, 2643 for 2012)
@@ -33,7 +41,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 #### Longest subject (eoth08):
 
-**File:** `eoth08/bb8f978a1a35e5fe2999efb7c1ba294.xml`
+**File:** [eoth08/bb8f978a1a35e5fe2999efb7c1ba294.xml](https://github.com/CDLUC3/eothxtf/blob/master/data/eoth08/bb8f978a1a35e5fe2999efb7c1ba294.xml)
 
 **ID:** `http://eot.us.archive.org/eot08/20080916072152/ysapi.samhsa.gov/`
 
@@ -43,7 +51,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 #### Most subjects (eoth08):
 
-**File:** `eoth08/29645bbb2f9220508f773cbe6e7394dc.xml`
+**File:** [eoth08/29645bbb2f9220508f773cbe6e7394dc.xml](https://github.com/CDLUC3/eothxtf/tree/master/dataeoth08/29645bbb2f9220508f773cbe6e7394dc.xml)
 
 **ID:** `http://eot.us.archive.org/eot08/20080916024008/bfrl.nist.gov/`
 
@@ -285,7 +293,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 #### Longest subject (eoth12):
 
-**File:** `eoth12/614aea91d757a22746fd81511f2e918b.xml`
+**File:** [eoth12/614aea91d757a22746fd81511f2e918b.xml](https://github.com/CDLUC3/eothxtf/blob/master/data/eoth12/614aea91d757a22746fd81511f2e918b.xml)
 
 **ID:** `http://crawls-wm.us.archive.org/eot-2012/20130218072540/http:/www.peacecorps.gov/`
 
@@ -295,7 +303,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 #### Most subjects (eoth12):
 
-**File:** `eoth12/77e0c90d36270ee99b68e011fbe57765.xml`
+**File:** [eoth12/77e0c90d36270ee99b68e011fbe57765.xml](https://github.com/CDLUC3/eothxtf/tree/master/dataeoth12/77e0c90d36270ee99b68e011fbe57765.xml)
 
 **ID:** `http://crawls-wm.us.archive.org/eot-2012/20130222001013/http:/www.isotopes.gov/`
 

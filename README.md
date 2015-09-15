@@ -10,19 +10,18 @@ Tools for mucking around with [eothxtf](https://github.com/CDLUC3/eothxtf).
 
 ### DC terms used
 
-Ten Dublin Core terms appear in all 5948 documents. One, `subject`, appears
-only in about 35% of files (about 40% of 2008 files and 29% of 2012).
+Note: this table ignores occurrences where the tag is empty or blank.
 
 | term | appears in | min occurrences | max occurrences | median occurrences | unique values |
 | :--- | :--------- | :-------------- | :-------------- | :----------------- | :------------ |
-| coverage | 5948 | 1 | 1 | 1 | 5 |
+| coverage | 2410 | 0 | 1 | 0 | 4 |
 | date | 5948 | 2 | 2 | 2 | 2750 |
-| description | 5948 | 1 | 1 | 1 | 1693 |
+| description | 2261 | 0 | 1 | 0 | 1691 |
 | format | 5948 | 1 | 1 | 1 | 1 |
 | identifier | 5948 | 1 | 1 | 1 | 5948 |
 | provenance | 5948 | 1 | 1 | 1 | 5444 |
 | relation | 5948 | 1 | 1 | 1 | 2 |
 | source | 5948 | 1 | 4 | 1 | 3650 |
-| subject | 2099 | 0 | 265 | 0 | 15550 |
-| title | 5948 | 1 | 1 | 1 | 4564 |
+| subject | 2093 | 0 | 265 | 0 | 15548 |
+| title | 5424 | 0 | 1 | 1 | 4563 |
 | type | 5948 | 1 | 1 | 1 | 1 |

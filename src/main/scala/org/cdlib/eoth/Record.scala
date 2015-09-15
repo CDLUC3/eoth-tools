@@ -5,25 +5,72 @@ import java.net.URI
 import java.nio.file.{Paths, Path}
 import java.time.LocalDate
 
+import org.apache.commons.lang3.StringUtils
 import org.apache.log4j.Logger
 
 import scala.collection.immutable.Seq
 import scala.collection.mutable
 import scala.xml._
 
+case class Record(
+  coverage: Option[String],
+  date: List[LocalDate],
+  description: Option[String],
+  format: String,
+  identifier: URI,
+  provenance: URI,
+  relation: URI,
+  source: String,
+  subject: Seq[String],
+  title: Option[String],
+  `type`: String
+  )
+
+
 object Record {
+
+  def apply(f: File): Record = {
+    val xml = XML.loadFile(f)
+    val terms: Map[String, Seq[String]] = DC_TERMS.map({ dc =>
+      dc -> (xml \ dc).map(n => n.text).filter(!StringUtils.isBlank(_))
+    }).toMap
+    Record(
+      terms("coverage").headOption,
+      terms("date").map(LocalDate.parse(_)).toList,
+      terms("description").headOption,
+      terms("format").head,
+      new URI(terms("identifier").head),
+      new URI(terms("provenance").head),
+      new URI(terms("relation").head),
+      terms("source").head,
+      terms("subject").toList,
+      terms("title").headOption,
+      terms("type").head
+    )
+  }
 
   val log = Logger.getLogger(Record.getClass)
 
   val DC_TERMS = List("abstract", "accessRights", "accrualMethod", "accrualPeriodicity", "accrualPolicy", "alternative", "audience", "available", "bibliographicCitation", "conformsTo", "contributor", "coverage", "created", "creator", "date", "dateAccepted", "dateCopyrighted", "dateSubmitted", "description", "educationLevel", "extent", "format", "hasFormat", "hasPart", "hasVersion", "identifier", "instructionalMethod", "isFormatOf", "isPartOf", "isReferencedBy", "isReplacedBy", "isRequiredBy", "isVersionOf", "issued", "language", "license", "mediator", "medium", "modified", "provenance", "publisher", "references", "relation", "replaces", "requires", "rights", "rightsHolder", "source", "spatial", "subject", "tableOfContents", "temporal", "title", "type", "valid")
 
-  def handle(f: File): Map[String, Seq[String]] = {
+  def handle(f: File): Option[Record] = {
     print('.')
-    val xml = XML.loadFile(f)
-    DC_TERMS.map({ dc =>
-      dc -> (xml \ dc).map(n => n.text)
-    }).toMap
+    try {
+      Some(Record(f))
+    } catch {
+      case e: Exception =>
+        log.error(f.getAbsolutePath+" failed: " + e.getMessage)
+        None
+    }
   }
+
+//  def handle(f: File): Map[String, Seq[String]] = {
+//    print('.')
+//        val xml = XML.loadFile(f)
+//        DC_TERMS.map({ dc =>
+//          dc -> (xml \ dc).map(n => n.text).filter(!StringUtils.isBlank(_))
+//        }).toMap
+//  }
 
   def main(args: Array[String]) {
     val eothxtf = Paths.get("").resolve("eothxtf")
@@ -32,10 +79,13 @@ object Record {
     val eoth08 = data.resolve("eoth08")
     val eoth12 = data.resolve("eoth12")
 
-    log.debug(s"eoth08 directory: $eoth08")
-    log.debug(s"eoth12 directory: $eoth12")
-
     var handleCount = 0
+
+    val records: Stream[Record] = Stream(eoth08, eoth12).flatMap(p => p.toFile().listFiles().filter(f => f.getName.endsWith(".xml"))).flatMap({ f: File =>
+      handleCount = handleCount + 1
+      handle(f)
+    })
+
     val results: Stream[(String, Object)] = Stream(eoth08, eoth12).flatMap(p => p.toFile().listFiles().filter(f => f.getName.endsWith(".xml"))).map({ f: File =>
       handleCount = handleCount + 1
       if (handleCount % 100 == 0) {

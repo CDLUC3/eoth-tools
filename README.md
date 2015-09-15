@@ -3,15 +3,15 @@
 Tools for mucking around with [eothxtf](https://github.com/CDLUC3/eothxtf).
 
 - [Discoveries](#discoveries)
-  - [DC terms used](#dc-terms-used)
-  - [Subjects](#subjects)
-    - [Longest subject (eoth08)](#longest-subject-eoth08)
-    - [Most subjects (eoth08)](#most-subjects-eoth08)
-    - [Longest subject (eoth12)](#longest-subject-eoth12)
-    - [Most subjects (eoth12)](#most-subjects-eoth12)
-  - [Sources](#sources)
-    - [Sources by coverage (eoth08)](#sources-by-coverage-eoth08)
-    - [Sources by coverage (eoth12)](#sources-by-coverage-eoth12)
+- [DC terms used](#dc-terms-used)
+- [Subjects](#subjects)
+  - [Longest subject (eoth08)](#longest-subject-eoth08)
+  - [Most subjects (eoth08)](#most-subjects-eoth08)
+  - [Longest subject (eoth12)](#longest-subject-eoth12)
+  - [Most subjects (eoth12)](#most-subjects-eoth12)
+- [Sources](#sources)
+  - [Sources by coverage (eoth08)](#sources-by-coverage-eoth08)
+  - [Sources by coverage (eoth12)](#sources-by-coverage-eoth12)
 
 ## Discoveries
 
@@ -22,7 +22,7 @@ Tools for mucking around with [eothxtf](https://github.com/CDLUC3/eothxtf).
   - 2008 uses yyyy-MM-dd
   - 2012 uses yyyyMMddHHmmss
 
-### DC terms used
+## DC terms used
 
 Note: this table ignores occurrences where the tag is empty or blank.
 
@@ -40,9 +40,9 @@ Note: this table ignores occurrences where the tag is empty or blank.
 | title | 5424 | 0 | 1 | 1 | 4563 |
 | type | 5948 | 1 | 1 | 1 | 1 |
 
-### Subjects
+## Subjects
 
-#### Longest subject (eoth08)
+### Longest subject (eoth08)
 
 **File:** [eoth08/bb8f978a1a35e5fe2999efb7c1ba294.xml](https://github.com/CDLUC3/eothxtf/blob/master/data/eoth08/bb8f978a1a35e5fe2999efb7c1ba294.xml)
 
@@ -52,7 +52,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 - NCSACW National Center Substance Abuse Child Welfare Children Mental Health Service Administration Treatment Youth Families Family Neglect Department Human Services SAMHSA CSAT ACYF OCAN DHHS CB CFF NICWA NCJFCJ NASADAD CWLA APHSA Future Futures Prevention Rehabilitative Rehabilitation Illness Alcohol Drug Addiction Recovery Assistance Alcoholism Parents Community Communities Special Needs Federal Agency Protect State Local States National Tribal Tribes Preservation Support Foster Care Adoption Independent Living Staff Training Technology Technical Maltreatment Safety Risk Policy Investigation Prosecution Case Cases Judicial Justice Practice Organization Expertise Improve Resource Resources Courts Court Judges Council Policymakers Represent American Public Association League Directors Indian Improvement Plan Reviews CFSR PIPs AOD CWS TAP NCADI Program Publication Compendium Literature Confidentiality Practice ACF NIH NIAAA NIDA NIMH BJA ONDCP Control Clearinghouse  Institute Online Network Abandoned Infants Legal Issues FRIENDS NACoA COAF NCADD NAADAC NOFAS NADCP DCPI Coalitions Fetal Syndrome Professionals CADCA Join Together Anonymous AA Al Anon Alateen NA Narcotics CDF Defense PACER FVPF Violence Prevention Fund Greenbook Initiative RAC Rural CAAS CESAR CASA RAND UCLA ISAP ATTC Presentations Conferences Legislators Officers
 
-#### Most subjects (eoth08)
+### Most subjects (eoth08)
 
 **File:** [eoth08/29645bbb2f9220508f773cbe6e7394dc.xml](https://github.com/CDLUC3/eothxtf/tree/master/dataeoth08/29645bbb2f9220508f773cbe6e7394dc.xml)
 
@@ -294,7 +294,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 - zone models
 - dlowexyz123
 
-#### Longest subject (eoth12)
+### Longest subject (eoth12)
 
 **File:** [eoth12/614aea91d757a22746fd81511f2e918b.xml](https://github.com/CDLUC3/eothxtf/blob/master/data/eoth12/614aea91d757a22746fd81511f2e918b.xml)
 
@@ -304,7 +304,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 - Peace Corps PeaceCorp Peace Corp Peace Crops volunteer volunteer abroad volunteer overseas overseas travel overseas careers international jobs international volunteer service organization donate contribute contribution international peace recruiting events volunteer recruitment small business development overseas teaching overseas teaching english health education HIV AIDS NGO urban development grassroots work agriculture jobs environment jobs global education lesson plans teacher guides education resources jobs job listings adventure
 
-#### Most subjects (eoth12)
+### Most subjects (eoth12)
 
 **File:** [eoth12/77e0c90d36270ee99b68e011fbe57765.xml](https://github.com/CDLUC3/eothxtf/tree/master/dataeoth12/77e0c90d36270ee99b68e011fbe57765.xml)
 
@@ -578,9 +578,9 @@ Note: this table ignores occurrences where the tag is empty or blank.
 - Zr
 - Uus
 
-### Sources
+## Sources
 
-#### Sources by coverage (eoth08)
+### Sources by coverage (eoth08)
 
 | Coverage | Sources |
 | :------- | :------ |
@@ -590,7 +590,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 | Quasi-Federal | usip, si, statejustice |
 | | americore, vitm, speaker, fedsource, cttso, bpn, lacoast, nationalchildrensstudy, employeeexpress, cncsig, pcp, heritageabroad, ncifcrf, stl, lodi, health, careervoyages, economy, sandia, cdiac, organdonor, fireleadership, jsf, mag, belmont, firesafety, web-services, stat-usa, nara, sns, nrojr, sero, business, hou, policyworks, coralreef, ncs, www-tele, wmd, americaslibrary, defense, segurosocial, flwsb, wapa, edd, nsls, reo, 4woman, omhrc, fbiic, nwcg, mentor, cogme, tradestatsexpress, clintonnj, onlinewbc, iawg, gsaauctions, banknet, housedems, homesales, aff, www-cfadc, oregon, t4, commtostrengthensocsec, in, thecoolspot, als, cidh, safetyact, elect98, hr, digitalpreservation, phila, design, pubadvocate, onhir, nationalbanknet, pasen, lincoln200, vaccines, drugfreeworkplace, www-library, cahwnet, www-nrg, americorp, pnl, unep, fccuniversity, catalog, safercar, bionet, italladdsup, rs6, atfonline, afterschool, itds, loki-www, globalwarming, ateam, acmis, fmshrc, aids, yesicankids, nmsc, socom, pacha, earthday, ezec, ccs, mca, emc, federaljobs, mt, energystar, stlucieco, econsumer, vallescaldera, gcmrc, hcsheriff, unicor, eetd, purch1, gsaadvantage, sandiego, glossary, icass, upw, tfhrc, nlcf, ppirs, cbonews, oceancommission, nhtsa, foodsafety, dcaa, regulations, sc94, hirevetsfirst, nysed, www-lecb, www-cta, occ, guideline, nwbc, treasurysecurities, caldera, cngr, solve, pac2001, www-rnc, dre, co, seer, servicecontract, ed, schoolmeals, metrokc, orise, nlm, dep, boosterseat, plan2002, medicalreservecorps, pns, takethepledge, etd, dc, usembassy-mexico, bernco, aqd, presidiotrust, hanford, slgs, compbio, www-focus, counterterrorismtraining, hp2010, historicpreservation, image, students, nafri, ecr, cfi, donotcall, www-nsd, lincolnbicentennial, freedomcorp, ymp, oea, nga, californiadesert, democraticwhip, dra, kscas, tt, lansce, federalinvestments, globalhealth, frames, csm, esh, osdbu, metabolicengineering, www-pcmdi, oecdonline, dna, standards, easysaver, pppl, dds, seti, operationhomecoming, archives, cs, neajazzmasters, frogweb, centennialofflight, americorps, serve, wizard, csee, asap, cabq, cwc, mesa, climateservices, incidentnews, www-boone, clinicaltrials, safecomprogram, lecb, woodsyowl, dceg, recreation, ioss, usatlas, ovc, biosecurityboard, eande, jfcom, xxx, ready, cdfifund, intelligence, ua-exp, rehab, capitol, fsgb, transportation, baaqmd, carboncyclescience, gps, ipd, healthypeople, mcdss, clubdrugs, justice, oig, esd, section508, arsusda, qso, savingsbonduniversity, interior, colorado, pcha, ca, frtr, healthierus, adp, foodsafetyjobs, enews, smart, sam, uni, oce, utahfireinfo, governmentjobs, earthobservationsummit, learnatf, ehponline, foia, ars-grin, caoc, 4parents, medlineplus, sbu, swpa, orau, fincen, www-iss, transit, fed, quic, pfpa, govbenefits, tas, floodsmart, sfwmd, eta-find, tigta, agsrhichome, training, arserrc, ideasec, frontiers, pay, ispo, ttbonline, usatradeonline, apasummit, hoover, www-td, americorpse, nibin, star, psn, tswg, mojavedata, www-bss, weblogin, www-nsdth, kpl, windpoweringamerica, www-fmi, advantage, srs, buybonds, usdebitcard, labs21century, public, gwa, mitigationactionplan, youth2work, chattanooga, nicsezcheckfbi, wwwedd, gos2, treasuryscams, nalusda, whitehousekids, accessacrossamerica, yesican, cebaf, twppo, 9-11commission, nano, bpa, bioenergy, savbonds, vetscommission, fedjobs, pdg, davisbacon, northcom, fordlibrarymuseum, eebond, hydrolab, ibond, ipr, iab, nhmfl, chemistry, rhic, fsafeds, fedinvest, maricopa, mtc, lep, savingsbondconnection, buyusa, rcd, info, aps, okgeosurvey1, pnc, defendamerica, iaiweb, fbo, asc, fedinvestonline, collegedrinkingprevention, itg, useconomy, hep, lookstoogoodtobetrue, isotopes, tomato, csss, hes, childstats, leadbelly, taapslink, reading-room, arm, uscert, to, aqmd, insurekidsnow, usphs, science, msb, www-bd, rcfl, pentagonchannel, iago, bxa, bnl, nwfireplan, dol-esa, nnlm, whs, landfire, drugabuse, sensornet, geocommunicator, cgsr, acl, www-d0, interns, daac, uscva, dss, nysl, td, web, ecd, kingcounty, symbols, www-esd, export, nedi, steroidabuse, doeal, mentalhealth, teens, worldstudy, wnc, dcma, dcpsa, www-atlas, bio, gsaxcess, lsd, ecosmart, cedr, cmt, accessmanagement, mentalhealthcommission, newton, sist, fnal, 252, amc, fdicig, nro, sellingtoarmy, jcs, www-lmmb, fcsic, ncem, e835, www-pdg, lss, consumer, dmh, www-oss, www-supernova, tissueengineering, wethepeople, physci, llnl, childcare, pnwin, user88, www-fbsc, fedforms, www-vis, anstaskforce, energycodes, bondpro, socialsecurity, marine, myblis, telework, plan2001, dccourts, hamiltontn, lib, patriotbonds, acs, jfmip, nationalservice, www-astro-theory, dtic, math, govjobs, ecrgroup, opportunityconference, nohrsc, tesorodirecto, utah, cancer, hhbond, external, surgeongeneral, sbaexchange, climatechange, globe, pcah, consumeraction, 4girls, sec-elearning, patientsafety, lbl, ornl, takepride, mrlc, invasivespecies, navy, education, medweek, healthfinder, egrpra, votenader, nndc, aether, sbmtd, nmfs, marines, listo, 5aday, infrared, agingstats, davie-fl, ttlplus, nationalmap, ecpic, fusedweb, xml, openscience, nifl, safetycenter, usmarshals, nvtc, govpay, erie, forestsandrangelands, disasterhelp, eta-find2, usability, dau, cnls, cjo, bart, mdl, usdoj, gundog, smallpox, ag, usap, recoverymonth, childsup, ourdocuments, calmis, ehswprod, genome, gfdl, panynj, recalls, noaa, golearn, nersc, estuaries, national4-hheadquarters, etp, adlnet, volunteersforprosperity, savingsbonds, estrategy, majoritywhip, coast2050, alexis-www, studentjobs, xyz, library, naturalinquirer, eurotradeonline, usgcrp, bethesda2001, frpp, arts, phy, fitness, usembassy, ntrc, www-als, nosc, sierranevadawild, salmonrecovery, nea, sdi, ucia, mymoney, montroserestoration, disability, ndep, pearl1, projectsafeneighborhoods, adwww, manufacturing, predictioncenter, hpcf, www-metdat, govloans, presidentialtransition, mypay, globalchange, na, ppd, fueleconomy, fcg, smokefree, ngc, docline, yic, nyc, forms, dotgov, afrh, ccs3, bbrp, dtra, fea, phenix, cafc, disa, anthrax, dodea, es, jimmycarterlibrary, cfda, www-physics, dnd, hpv-web, nbc, aviationweather, t10, chemsafety, nypa, icbemp, dts, uswcl, theory, wdol, dia, dutchessny, cflhd, ohio, wp, www-visualmedia, eldercare, infn, selltoairforce, sdr, norad, cashlink2, disabilityinfo, centcom, kids, sierrawildbear, iat, recdata, fdicconnect, 198, inel, medicare, tsunami, ie, its, dmg, msg, 4women, newnet, loc, uscms, ada, socialsecurityadvisoryboard, www-rhvd, geodata, korea50, io, attorneygeneral, lsc, www-ibt, dis, mnrg, 911commission, fcn, sdp, www-cms, pdhealth, emsl, arnet, www-cdf, presidentialserviceawards, lanl, ethicsburg, fai, holocaustassets, fedteds, treasurydirect, icva, bettis, nih, usbp, execsec, weather, businesslaw, time, darpa, registration, pentagon, cms, nationalatlas, gsd, msd, hdfeos, usip, www-cxro, www-didc, taaps, herzberg, lifeandliberty, fiddlinforesters, nationalbank, amberalert, ic3, lutece, preventwmd, fcsm, usaservices, thejobpage, safertrucks, afadvantage, unitedstatesvisas, uscapitolpolice, ars, ndop, core, eucom, computersforlearning, guidelines, sbc, ofcm, www-eng, vetbiz, dla, womenbiz, jtdi, faasafety, quarknet, usfj, usicn, aesdirect, geomac, pds-rings, fdicoig, aftac, lsnnet, scl, novel, anl, bioeco, dsca, economicindicators, voanews, ciac, citizencorps, 3ht, smallstep, 232, yosipuedo, ee, nbii, jgi-psf, nitrd, epls, snap, preserveamerica, tsp, capitolflags, hcqualitycommission, nutrition, neutrons, csmr, mpa, cap, treasuryauctions, contractdirectory, negocios, nemi, neutron, lca, usborderpatrol, bldrdoc, inst, locatorplus, tempe, ameslab, digitizationguidelines, hawaii, bam, cybercrime, casu, nic, swepam, women-21, aipl, mapguide, oshpd, learning, mitigationcommission, grants, arpa, cfd, usuhs, peacecore, picturethis, facadatabase, plainlanguage, ccr, pnt, mcs, windows, fedreg, etaaps, taapsconnect, plan, tpm, rocis, talkingquality, ms, southcom, ipp, insc, acqnet, nv, nccs, feditg, padillabay, www-afrd, airnow, ead, nihseniorhealth, nysm, fedworld, nws, infoserve, visitnh, hiv, directory, osm, handle, dfas, memorial, energysavers, search, nhlbihin, wisconsin, uspsoig, memory, transcom, dod, climatetechnology |
 
-#### Sources by coverage (eoth12)
+### Sources by coverage (eoth12)
 
 | Coverage | Sources |
 | :------- | :------ |

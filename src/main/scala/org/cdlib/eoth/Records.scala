@@ -169,6 +169,8 @@ object Records {
       withMostSubjects.subject.foreach { s =>
         println("- " + s)
       }
+
+      println()
     }
   }
 }

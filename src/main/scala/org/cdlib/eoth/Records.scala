@@ -127,6 +127,10 @@ class Records(val records: List[Record]) {
     coverages.size -> source
   })
 
+  lazy val allSubjectKeywords: List[String] = {
+    bySubject.keys.flatMap(s => s.split("\\s").map(t => t.trim)).toList.distinct.sorted
+  }
+
   // --------------------------------------------------
   // Private
 
@@ -198,21 +202,6 @@ object Records {
       println()
     }
 
-    //    println("### Sources by coverage (" + directory.getName + ")\n")
-    //
-    //    println("| Coverage | Sources |")
-    //    println("| :------- | :------ |")
-    //    records.sourcesByCoverage.foreach {
-    //      case (coverage: String, sourceSet: Set[String]) =>
-    //        val sources = sourceSet.toList.sorted.mkString(", ")
-    //        print(s"| $coverage ")
-    //        println(s"| $sources |")
-    //    }
-    //
-    //    val sources = records.sourcesWithoutCoverage.toList.sorted.mkString(", ")
-    //    print(s"| ")
-    //    println(s"| $sources |")
-    //    println()
   }
 
   private def printSubjects(directory: File, records: Records): Unit = {
@@ -226,10 +215,9 @@ object Records {
     println("**Subject (all one entry!):**")
     println()
     println("- " + withLongestSubject.longestSubject)
-
     println()
 
-    println("#### Most subjects (" + directory.getName + "):")
+    println("#### Most subjects (" + directory.getName + ")")
     println()
     val withMostSubjects = records.withMostSubjects
     println("**File:** [" + withMostSubjects.relativePath + "](https://github.com/CDLUC3/eothxtf/tree/master/data" + withMostSubjects.relativePath + ")")
@@ -238,7 +226,11 @@ object Records {
     println()
     println("**Subjects:**")
     println("- " + withMostSubjects.subject.mkString(", "))
+    println()
 
+    println("#### All subject keywords ("+ directory.getName + ")")
+    println()
+    println("- " + records.allSubjectKeywords.mkString(", "))
     println()
   }
 }

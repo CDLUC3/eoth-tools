@@ -5,10 +5,10 @@ Tools for mucking around with [eothxtf](https://github.com/CDLUC3/eothxtf).
 - [Discoveries](#discoveries)
   - [DC terms used](#dc-terms-used)
   - [Subjects](#subjects)
-    - [Longest subject (eoth08)](#longest-subject--eoth08--)
-    - [Most subjects (eoth08)](#most-subjects--eoth08--)
-    - [Longest subject (eoth12)](#longest-subject--eoth12--)
-    - [Most subjects (eoth12)](#most-subjects--eoth12--)
+    - [Longest subject (eoth08)](#longest-subject-eoth08)
+    - [Most subjects (eoth08)](#most-subjects-eoth08)
+    - [Longest subject (eoth12)](#longest-subject-eoth12)
+    - [Most subjects (eoth12)](#most-subjects-eoth12)
 
 ## Discoveries
 

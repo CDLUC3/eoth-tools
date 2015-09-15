@@ -21,7 +21,7 @@ case class Record(
   identifier: URI,
   provenance: URI,
   relation: URI,
-  source: String,
+  source: List[String],
   subject: List[String],
   title: Option[String],
   `type`: String,
@@ -31,9 +31,11 @@ case class Record(
   lazy val hasCoverage = coverage.isDefined
   lazy val hasDescription = description.isDefined
   lazy val hasSubject = subject.nonEmpty
+  lazy val hasSource = source.nonEmpty
   lazy val hasTitle = title.isDefined
   lazy val hasFile = file.isDefined
 
+  lazy val numSoruces = source.size
   lazy val numSubjects = subject.size
   lazy val numDates = date.size
 
@@ -77,7 +79,7 @@ object Record {
       new URI(terms("identifier").head).normalize(),
       new URI(terms("provenance").head).normalize(),
       new URI(terms("relation").head).normalize(),
-      terms("source").head,
+      terms("source").toList,
       terms("subject").toList,
       terms("title").headOption,
       terms("type").head,

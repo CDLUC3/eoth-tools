@@ -79,7 +79,7 @@ class Records(val records: List[Record]) {
   }
 
   lazy val bySource = {
-    toMultimap(records.map(r => r.source -> r))
+    toMultimap(records.flatMap(r => r.source.map(s => s -> r)))
   }
 
   lazy val bySubject = {
@@ -95,7 +95,7 @@ class Records(val records: List[Record]) {
   }
 
   lazy val withLongestSubject: Record = {
-    withSubject.sortBy({r =>
+    withSubject.sortBy({ r =>
       r.longestSubject.length
     }).last
   }
@@ -107,6 +107,14 @@ class Records(val records: List[Record]) {
   lazy val withMostSubjects: Record = {
     byNumSubjects.last
   }
+
+  lazy val allCoverage = byCoverage.keys.toList.sorted
+
+  lazy val sourcesByCoverage: Map[String, Set[String]] = allCoverage.map { coverage =>
+    coverage -> byCoverage(coverage).flatMap(_.source).toSet
+  }.toMap
+
+  lazy val sourcesWithoutCoverage: Set[String] = withoutCoverage.flatMap(_.source).toSet
 
   // --------------------------------------------------
   // Private
@@ -129,48 +137,68 @@ object Records {
     val eoth08 = data.resolve("eoth08").toFile
     val eoth12 = data.resolve("eoth12").toFile
 
-    Stream(eoth08, eoth12).foreach {d =>
+    Stream(eoth08, eoth12).foreach { d =>
+      println()
+
       val xmlFiles = d.listFiles().filter(_.getName.endsWith(".xml"))
 
       var handleCount = 0
       val records = new Records(xmlFiles.flatMap({ f: File =>
         handleCount = handleCount + 1
         if (handleCount % 100 == 0) {
-//          println(s" $handleCount")
+          //          println(s" $handleCount")
         }
         Record.fromFile(f)
       }).toList)
 
-//      println(handleCount)
-//      println()
-
-      println("#### Longest subject (" + d.getName + "):")
-      println()
-      val withLongestSubject = records.withLongestSubject
-      println("**File:** `" + withLongestSubject.relativePath + "`")
-      println()
-      println("**ID:** `" + withLongestSubject.identifier + "`")
-      println()
-      println("**Subject:**")
-      println()
-      println("- " + withLongestSubject.longestSubject)
-
-      println()
-
-      println("#### Most subjects (" + d.getName + "):")
-      println()
-      val withMostSubjects = records.withMostSubjects
-      println("**File:** `" + withMostSubjects.relativePath + "`")
-      println()
-      println("**ID:** `" + withMostSubjects.identifier + "`")
-      println()
-      println("**Subjects:**")
-      println()
-      withMostSubjects.subject.foreach { s =>
-        println("- " + s)
-      }
-
-      println()
+      printSourcesByCoverage(d, records)
     }
+  }
+
+  def printSourcesByCoverage(d: File, records: Records): Unit = {
+    println("#### Sources by coverage (" + d.getName + ")\n")
+
+    println("| Coverage | Sources |")
+    println("| :------- | :------ |")
+    records.sourcesByCoverage.foreach {
+      case (coverage: String, sourceSet: Set[String]) =>
+        val sources = sourceSet.toList.sorted.mkString(", ")
+        print(s"| $coverage ")
+        println(s"| $sources |")
+    }
+
+    val sources = records.sourcesWithoutCoverage.toList.sorted.mkString(", ")
+    print(s"| ")
+    println(s"| $sources |")
+  }
+
+  private def printSubjects(directory: File, records: Records): Unit = {
+    println("#### Longest subject (" + directory.getName + ")")
+    println()
+    val withLongestSubject = records.withLongestSubject
+    println("**File:** [" + withLongestSubject.relativePath + "](https://github.com/CDLUC3/eothxtf/blob/master/data/" + withLongestSubject.relativePath + ")")
+    println()
+    println("**ID:** `" + withLongestSubject.identifier + "`")
+    println()
+    println("**Subject:**")
+    println()
+    println("- " + withLongestSubject.longestSubject)
+
+    println()
+
+    println("#### Most subjects (" + directory.getName + "):")
+    println()
+    val withMostSubjects = records.withMostSubjects
+    println("**File:** [" + withMostSubjects.relativePath + "](https://github.com/CDLUC3/eothxtf/tree/master/data" + withMostSubjects.relativePath + ")")
+    println()
+    println("**ID:** `" + withMostSubjects.identifier + "`")
+    println()
+    println("**Subjects:**")
+    println()
+    withMostSubjects.subject.foreach { s =>
+      println("- " + s)
+    }
+
+    println()
   }
 }

@@ -178,7 +178,8 @@ object Records {
 
   def printSourceAndCoverage(directory: File, records: Records): Unit = {
     val dirName = directory.getName
-    println("### Mapping source to coverage (" + dirName + ")\n")
+
+    println("## `<source>` and `<coverage>` (" + dirName + ")\n")
 
     val counts = records.sourcesByCoverageCount.keys.toList.sorted.reverse
     counts.foreach { count =>
@@ -202,9 +203,12 @@ object Records {
       println()
     }
 
+    println("\n------------------------------------------------------------\n")
   }
 
   private def printSubjects(directory: File, records: Records): Unit = {
+    println("## Subjects (" + directory.getName + ")\n")
+
     println("### Longest subject (" + directory.getName + ")")
     println()
     val withLongestSubject = records.withLongestSubject
@@ -217,7 +221,7 @@ object Records {
     println("- " + withLongestSubject.longestSubject)
     println()
 
-    println("#### Most subjects (" + directory.getName + ")")
+    println("### Most subjects (" + directory.getName + ")")
     println()
     val withMostSubjects = records.withMostSubjects
     println("**File:** [" + withMostSubjects.relativePath + "](https://github.com/CDLUC3/eothxtf/tree/master/data" + withMostSubjects.relativePath + ")")
@@ -228,9 +232,10 @@ object Records {
     println("- " + withMostSubjects.subject.mkString(", "))
     println()
 
-    println("#### All subject keywords ("+ directory.getName + ")")
+    println("### All subject keywords ("+ directory.getName + ")")
     println()
     println("- " + records.allSubjectKeywords.mkString(", "))
-    println()
+
+    println("\n------------------------------------------------------------\n")
   }
 }

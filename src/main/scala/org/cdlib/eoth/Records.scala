@@ -112,7 +112,7 @@ class Records(val records: List[Record]) {
 
   lazy val allSources = records.flatMap(r => r.source).distinct.sorted
 
-  lazy val sourcesByCoverage: Map[String, Set[String]] = allCoverage.map { coverage =>
+  lazy val coverageToSource: Map[String, Set[String]] = allCoverage.map { coverage =>
     coverage -> byCoverage(coverage).flatMap(_.source).toSet
   }.toMap
 
@@ -121,6 +121,11 @@ class Records(val records: List[Record]) {
   lazy val sourceToCoverage: Map[String, Set[String]] = {
     toMultimap(records.flatMap(r => r.source.flatMap(s => r.coverage.map(c => s -> c))))
   }
+
+  lazy val sourcesByCoverageCount: Map[Int, Set[String]] = toMultimap(allSources.map { source =>
+    val coverages = sourceToCoverage.getOrElse(source, Set.empty[String])
+    coverages.size -> source
+  })
 
   // --------------------------------------------------
   // Private
@@ -168,17 +173,30 @@ object Records {
   }
 
   def printSourceAndCoverage(directory: File, records: Records): Unit = {
-    println("### Source and coverage (" + directory.getName + ")\n")
+    val dirName = directory.getName
+    println("### Mapping source to coverage (" + dirName + ")\n")
 
-    println("| Sources | Coverage |")
-    println("| :------ | :------- |")
+    val counts = records.sourcesByCoverageCount.keys.toList.sorted.reverse
+    counts.foreach { count =>
+      val sourceSet = records.sourcesByCoverageCount.getOrElse(count, Set.empty[String])
+      val sources = sourceSet.toList.sorted
 
-    records.allSources.foreach { source =>
-      val coverages = records.sourceToCoverage.getOrElse(source, Set.empty[String]).mkString(", ")
-      println(s"| $source | $coverages |")
+      println(s"#### Sources appearing in $count coverage areas for $dirName")
+      println()
+
+      if (count != 1) {
+        val list = sources.mkString(", ")
+        println(s"- $list")
+      } else {
+        records.allCoverage.foreach { coverage =>
+          val list = records.coverageToSource.getOrElse(coverage, Set.empty[String]).filter(sourceSet.contains(_)).toList.sorted.mkString(", ")
+          println(s"- $coverage")
+          println(s"  - $list")
+        }
+      }
+
+      println()
     }
-
-    println()
 
     //    println("### Sources by coverage (" + directory.getName + ")\n")
     //

@@ -3,7 +3,8 @@ package org.cdlib.eoth
 import java.io.File
 import java.net.URI
 import java.nio.file.{Paths, Path}
-import java.time.LocalDate
+import java.time.format.{DateTimeFormatter, DateTimeParseException}
+import java.time.{LocalDateTime, LocalDate}
 
 import org.apache.commons.lang3.StringUtils
 import org.apache.log4j.Logger
@@ -14,46 +15,78 @@ import scala.xml._
 
 case class Record(
   coverage: Option[String],
-  date: List[LocalDate],
+  date: List[Either[LocalDate, LocalDateTime]],
   description: Option[String],
   format: String,
   identifier: URI,
   provenance: URI,
   relation: URI,
   source: String,
-  subject: Seq[String],
+  subject: List[String],
   title: Option[String],
-  `type`: String
-  )
+  `type`: String,
+  file: Option[File] = None
+  ) {
+
+  lazy val hasCoverage = coverage.isDefined
+  lazy val hasDescription = description.isDefined
+  lazy val hasSubject = subject.nonEmpty
+  lazy val hasTitle = title.isDefined
+  lazy val hasFile = file.isDefined
+
+  lazy val numSubjects = subject.size
+  lazy val numDates = date.size
+
+  lazy val subjectsByLength = subject.sortBy(s => s.trim.length)
+  lazy val longestSubject = subject.lastOption match {
+    case Some(s) => s
+    case _ => ""
+  }
+
+  lazy val absolutePath = file match {
+    case Some(f) => f.getAbsolutePath
+    case _ => ""
+  }
+}
 
 
 object Record {
+  val log = Logger.getLogger(Record.getClass)
+  val DC_TERMS = List("abstract", "accessRights", "accrualMethod", "accrualPeriodicity", "accrualPolicy", "alternative", "audience", "available", "bibliographicCitation", "conformsTo", "contributor", "coverage", "created", "creator", "date", "dateAccepted", "dateCopyrighted", "dateSubmitted", "description", "educationLevel", "extent", "format", "hasFormat", "hasPart", "hasVersion", "identifier", "instructionalMethod", "isFormatOf", "isPartOf", "isReferencedBy", "isReplacedBy", "isRequiredBy", "isVersionOf", "issued", "language", "license", "mediator", "medium", "modified", "provenance", "publisher", "references", "relation", "replaces", "requires", "rights", "rightsHolder", "source", "spatial", "subject", "tableOfContents", "temporal", "title", "type", "valid")
+
+  val TIME_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
 
   def apply(f: File): Record = {
     val xml = XML.loadFile(f)
     val terms: Map[String, Seq[String]] = DC_TERMS.map({ dc =>
-      dc -> (xml \ dc).map(n => n.text).filter(!StringUtils.isBlank(_))
+      dc -> (xml \ dc).map(n => n.text.trim).filter(!StringUtils.isBlank(_))
     }).toMap
     Record(
       terms("coverage").headOption,
-      terms("date").map(LocalDate.parse(_)).toList,
+      terms("date").map(d => parseDate(d)).toList,
       terms("description").headOption,
       terms("format").head,
-      new URI(terms("identifier").head),
-      new URI(terms("provenance").head),
-      new URI(terms("relation").head),
+      new URI(terms("identifier").head).normalize(),
+      new URI(terms("provenance").head).normalize(),
+      new URI(terms("relation").head).normalize(),
       terms("source").head,
       terms("subject").toList,
       terms("title").headOption,
-      terms("type").head
+      terms("type").head,
+      Some(f)
     )
   }
 
-  val log = Logger.getLogger(Record.getClass)
+  def parseDate(d: String): Either[LocalDate, LocalDateTime] = {
+    try {
+      Left(LocalDate.parse(d))
+    } catch {
+      case e: DateTimeParseException =>
+        Right(LocalDateTime.parse(d, TIME_FORMAT))
+    }
+  }
 
-  val DC_TERMS = List("abstract", "accessRights", "accrualMethod", "accrualPeriodicity", "accrualPolicy", "alternative", "audience", "available", "bibliographicCitation", "conformsTo", "contributor", "coverage", "created", "creator", "date", "dateAccepted", "dateCopyrighted", "dateSubmitted", "description", "educationLevel", "extent", "format", "hasFormat", "hasPart", "hasVersion", "identifier", "instructionalMethod", "isFormatOf", "isPartOf", "isReferencedBy", "isReplacedBy", "isRequiredBy", "isVersionOf", "issued", "language", "license", "mediator", "medium", "modified", "provenance", "publisher", "references", "relation", "replaces", "requires", "rights", "rightsHolder", "source", "spatial", "subject", "tableOfContents", "temporal", "title", "type", "valid")
-
-  def handle(f: File): Option[Record] = {
+  def fromFile(f: File): Option[Record] = {
     print('.')
     try {
       Some(Record(f))
@@ -61,113 +94,6 @@ object Record {
       case e: Exception =>
         log.error(f.getAbsolutePath+" failed: " + e.getMessage)
         None
-    }
-  }
-
-//  def handle(f: File): Map[String, Seq[String]] = {
-//    print('.')
-//        val xml = XML.loadFile(f)
-//        DC_TERMS.map({ dc =>
-//          dc -> (xml \ dc).map(n => n.text).filter(!StringUtils.isBlank(_))
-//        }).toMap
-//  }
-
-  def main(args: Array[String]) {
-    val eothxtf = Paths.get("").resolve("eothxtf")
-    log.debug(s"eothxtf directory: $eothxtf")
-    val data = eothxtf.resolve("data")
-    val eoth08 = data.resolve("eoth08")
-    val eoth12 = data.resolve("eoth12")
-
-    var handleCount = 0
-
-    val records: Stream[Record] = Stream(eoth08, eoth12).flatMap(p => p.toFile().listFiles().filter(f => f.getName.endsWith(".xml"))).flatMap({ f: File =>
-      handleCount = handleCount + 1
-      handle(f)
-    })
-
-    val results: Stream[(String, Object)] = Stream(eoth08, eoth12).flatMap(p => p.toFile().listFiles().filter(f => f.getName.endsWith(".xml"))).map({ f: File =>
-      handleCount = handleCount + 1
-      if (handleCount % 100 == 0) {
-        println(s" $handleCount")
-      }
-      try {
-        f.getAbsolutePath -> handle(f)
-      } catch {
-        case e: Exception =>
-          f.getAbsolutePath -> e
-      }
-    })
-
-    val allCounts = mutable.Map[String, List[Int]]()
-    val exceptions = mutable.Map[String, Exception]()
-
-    results.foreach {
-      case (file, termToValue: Map[String, Seq[String]]) =>
-        DC_TERMS.foreach({ term: String =>
-          val count = termToValue(term).size
-          val counts = allCounts.getOrElse(term, List[Int]())
-          allCounts(term) = counts :+ count
-        })
-      case (s, e: Exception) =>
-        exceptions(s) = e
-    }
-
-    println(s" $handleCount")
-
-    println("------------------------------------------------------------------------------------------------------------------------")
-
-    var dcTermsUsed = List[String]()
-
-    DC_TERMS.foreach({ dc: String =>
-      val counts = allCounts.getOrElse(dc, List[Int]())
-      val max = counts.max
-      if (max > 0) {
-        dcTermsUsed = dcTermsUsed :+ dc
-        println(s"$dc: $max")
-      }
-    })
-
-    println("------------------------------------------------------------------------------------------------------------------------")
-
-    val valuesForTerms = mutable.Map[String, Set[String]]()
-    results.foreach {
-      case (file, termToValue: Map[String, Seq[String]]) =>
-        dcTermsUsed.foreach({ term =>
-          termToValue.get(term) match {
-            case Some(values) =>
-              val allValues = valuesForTerms.getOrElse(term, Set[String]())
-              valuesForTerms(term) = allValues ++ values
-            case _ =>
-          }
-        })
-      case _ =>
-    }
-
-    println("------------------------------------------------------------------------------------------------------------------------")
-
-    val term_to_max = mutable.Map[String, Int]()
-
-    println("| term | appears in | min occurrences | max occurrences | median occurrences | unique values |")
-    println("| :--- | :--------- | :-------------- | :-------------- | :----------------- | :------------ |")
-    dcTermsUsed.foreach({ term =>
-      val appears_in = allCounts(term).count(p => p > 0)
-      val sorted = allCounts(term).sorted
-      val min_occurrences = sorted.min
-      val max_occurrences = sorted.last
-      val median_occurrences = sorted(sorted.size / 2)
-      val uniqueValues = valuesForTerms(term).size
-      term_to_max(term) = max_occurrences
-      println("| %s | %d | %d | %d | %d | %d |".format(term, appears_in, min_occurrences, max_occurrences, median_occurrences, uniqueValues))
-    })
-
-    if (exceptions.nonEmpty) {
-      println("------------------------------------------------------------------------------------------------------------------------")
-      val byMessage: mutable.Map[Exception, String] = exceptions.map { case (s: String, e: Exception) => (e, s) }
-      byMessage.keys.toList.sortBy(e => e.getMessage).foreach({ e =>
-        val s = byMessage(e)
-        println("%s\t%s".format(s, e.getMessage))
-      })
     }
   }
 }

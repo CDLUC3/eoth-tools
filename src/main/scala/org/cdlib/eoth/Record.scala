@@ -69,7 +69,9 @@ object Record {
   def apply(f: File): Record = {
     val xml = XML.loadFile(f)
     val terms: Map[String, Seq[String]] = DC_TERMS.map({ dc =>
-      dc -> (xml \ dc).map(n => n.text.trim).filter(!StringUtils.isBlank(_))
+      dc -> (xml \ dc).map(n => n.text.trim).filter(!StringUtils.isBlank(_)).map { t =>
+        t.replace("<", "&lt;").replace(">", "&gt;").replaceFirst("^_", "\\\\_")
+      }
     }).toMap
     Record(
       terms("coverage").headOption,

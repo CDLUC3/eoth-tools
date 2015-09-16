@@ -36,7 +36,7 @@ Tools for mucking around with [eothxtf](https://github.com/CDLUC3/eothxtf).
 - Subjects in both 2008 and 2012 datasets are sometimes distinct, multiple `<subject>` tags (probably correct) and
   sometimes just single tags with a long list of words / phrases (probably wrong)
 - At least some subject keywords are junk (punctuation marks), unhelpful (numbers), or mangled (keywords with brackets,
-  quotes, or other punctuation marks)
+  quotes, or other punctuation marks; foreign characters with unknown encodings)
 
 ------------------------------------------------------------
 

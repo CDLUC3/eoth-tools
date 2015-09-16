@@ -74,7 +74,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 ### Most subjects (eoth08)
 
-**File:** [eoth08/29645bbb2f9220508f773cbe6e7394dc.xml](https://github.com/CDLUC3/eothxtf/tree/master/dataeoth08/29645bbb2f9220508f773cbe6e7394dc.xml)
+**File:** [eoth08/29645bbb2f9220508f773cbe6e7394dc.xml](https://github.com/CDLUC3/eothxtf/blob/master/data/eoth08/29645bbb2f9220508f773cbe6e7394dc.xml)
 
 **ID:** `http://eot.us.archive.org/eot08/20080916024008/bfrl.nist.gov/`
 
@@ -101,7 +101,7 @@ Note: this table ignores occurrences where the tag is empty or blank.
 
 ### Most subjects (eoth12)
 
-**File:** [eoth12/77e0c90d36270ee99b68e011fbe57765.xml](https://github.com/CDLUC3/eothxtf/tree/master/dataeoth12/77e0c90d36270ee99b68e011fbe57765.xml)
+**File:** [eoth12/77e0c90d36270ee99b68e011fbe57765.xml](https://github.com/CDLUC3/eothxtf/blob/master/data/eoth12/77e0c90d36270ee99b68e011fbe57765.xml)
 
 **ID:** `http://crawls-wm.us.archive.org/eot-2012/20130222001013/http:/www.isotopes.gov/`
 

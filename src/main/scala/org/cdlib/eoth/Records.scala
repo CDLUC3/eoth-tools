@@ -224,7 +224,7 @@ object Records {
     println("### Most subjects (" + directory.getName + ")")
     println()
     val withMostSubjects = records.withMostSubjects
-    println("**File:** [" + withMostSubjects.relativePath + "](https://github.com/CDLUC3/eothxtf/tree/master/data" + withMostSubjects.relativePath + ")")
+    println("**File:** [" + withMostSubjects.relativePath + "](https://github.com/CDLUC3/eothxtf/blob/master/data/" + withMostSubjects.relativePath + ")")
     println()
     println("**ID:** `" + withMostSubjects.identifier + "`")
     println()
